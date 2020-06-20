@@ -4,7 +4,7 @@ import Basic.Category
 import Basic.Functor
 import Product.ProductCategory
 import CoLimits.CoProduct
-import Utils
+-- import Utils
 import Syntax.PreorderReasoning
 
 %access public export
@@ -14,7 +14,7 @@ import Syntax.PreorderReasoning
 
 coProductMapObj :
      (cat : Category)
-  -> (coProduct : ((l, r : obj cat) -> CoProduct cat l r))
+  -> (coProduct : (l, r : obj cat) -> CoProduct cat l r)
   -> (obj cat, obj cat)
   -> obj cat
 coProductMapObj cat coProduct a = carrier $ coProduct (fst a) (snd a)
@@ -22,7 +22,7 @@ coProductMapObj cat coProduct a = carrier $ coProduct (fst a) (snd a)
 
 coProductMapMor :
      (cat : Category)
-  -> (coProduct : ((l, r : obj cat) -> CoProduct cat l r))
+  -> (coProduct : (l, r : obj cat) -> CoProduct cat l r)
   -> (a, b : (obj cat, obj cat))
   -> ProductMorphism cat cat a b
   -> mor cat (carrier $ coProduct (fst a) (snd a))
@@ -37,7 +37,7 @@ coProductMapMor cat coProduct (la, ra) (lb, rb) (MkProductMorphism pi1 pi2)
 
 coProductPreserveId :
      (cat : Category)
-  -> (coProduct : ((l, r : obj cat) -> CoProduct cat l r))
+  -> (coProduct : (l, r : obj cat) -> CoProduct cat l r)
   -> (a : (obj cat, obj cat))
   -> coProductMapMor cat coProduct a a (productIdentity a)
    = identity cat (carrier $ coProduct (fst a) (snd a))
@@ -72,7 +72,7 @@ coProductPreserveId cat coProduct (l, r) = sym prf where
 
 coProductPreserveCompose :
      (cat : Category)
-  -> (coProduct : ((l, r : obj cat) -> CoProduct cat l r))
+  -> (coProduct : (l, r : obj cat) -> CoProduct cat l r)
   -> (a, b, c : (obj cat, obj cat))
   -> (f : ProductMorphism cat cat a b)
   -> (g : ProductMorphism cat cat b c)
